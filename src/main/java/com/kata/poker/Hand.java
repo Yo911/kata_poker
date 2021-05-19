@@ -12,13 +12,16 @@ public class Hand {
     }
 
     public String evaluate() {
-        Card highCard;
+        Card highCard = evaluateHighCard();
+        return "high card: " + highCard.getCardName();
+    }
+
+    private Card evaluateHighCard() {
         Optional<Card> cardOptional = handGame.stream().filter(c -> c.getValue() == 1).findAny();
-        if (!cardOptional.isPresent()) {
+        if (cardOptional.isEmpty()) {
             cardOptional = handGame.stream().max(Comparator.comparingInt(Card::getValue));
         }
-        highCard = cardOptional.get();
-        return "high card: " + highCard.getCardName();
+        return cardOptional.orElse(null);
     }
 
 }

@@ -38,4 +38,19 @@ class HandTest {
         Assertions.assertEquals("high card: King", evaluateResult);
     }
 
+    @Test
+    void should_return_7_high_when_evaluate_hand() {
+        Set<Card> handGameSet = new HashSet<>();
+        handGameSet.add(new Card(7, Card.Suit.S));
+        handGameSet.add(new Card(6, Card.Suit.C));
+        handGameSet.add(new Card(5, Card.Suit.S));
+        handGameSet.add(new Card(4, Card.Suit.D));
+        handGameSet.add(new Card(2, Card.Suit.H));
+        Hand hand = new Hand(handGameSet);
+
+        String evaluateResult = hand.evaluate();
+
+        Assertions.assertEquals("high card: 7", evaluateResult);
+    }
+
 }
