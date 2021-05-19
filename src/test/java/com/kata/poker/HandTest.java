@@ -143,4 +143,19 @@ class HandTest {
         Assertions.assertEquals("straight of : 6", evaluateResult);
     }
 
+    @Test
+    void should_return_straingth_of_queen_when_evaluate_hand() {
+        Set<Card> handGameSet = new HashSet<>();
+        handGameSet.add(new Card(6, Card.Suit.S));
+        handGameSet.add(new Card(7, Card.Suit.C));
+        handGameSet.add(new Card(8, Card.Suit.S));
+        handGameSet.add(new Card(9, Card.Suit.D));
+        handGameSet.add(new Card(10, Card.Suit.H));
+        Hand hand = new Hand(handGameSet);
+
+        String evaluateResult = hand.evaluate();
+
+        Assertions.assertEquals("straight of : Queen", evaluateResult);
+    }
+
 }
