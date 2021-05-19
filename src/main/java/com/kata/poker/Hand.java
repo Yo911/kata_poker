@@ -15,13 +15,17 @@ public class Hand {
     }
 
     public String evaluate() {
+        Card fourOfKind = getNumbersOfKind(4);
+        if (fourOfKind != null) {
+            return "three of kind : " + fourOfKind.getCardName();
+        }
         if (isFlush() == 1) {
             return "flush of : " + evaluateHighCard().getCardName();
         }
         if (isConsecutive()) {
             return "straight of : " + evaluateHighCard().getCardName();
         }
-        Card threeOfKind = getThreeOfKind();
+        Card threeOfKind = getNumbersOfKind(3);
         List<Integer> paires = getPaires();
         if (threeOfKind != null) {
             if (!paires.isEmpty()) {
@@ -64,9 +68,9 @@ public class Hand {
         return paires;
     }
 
-    private Card getThreeOfKind() {
+    private Card getNumbersOfKind(int numberOfFrequency) {
         Optional<Integer> three = values.stream()
-                .filter(frequencyOfCardValuePredicate(values, 3)).findFirst();
+                .filter(frequencyOfCardValuePredicate(values, numberOfFrequency)).findFirst();
         return three.isEmpty() ? null : getCardFromValue(three.get());
     }
 

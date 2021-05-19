@@ -188,4 +188,19 @@ class HandTest {
         Assertions.assertEquals("full of : 10 over 8", evaluateResult);
     }
 
+    @Test
+    void should_return_four_of_kind_of_10_when_evaluate_hand() {
+        Set<Card> handGameSet = new HashSet<>();
+        handGameSet.add(new Card(6, Card.Suit.S));
+        handGameSet.add(new Card(8, Card.Suit.H));
+        handGameSet.add(new Card(8, Card.Suit.D));
+        handGameSet.add(new Card(8, Card.Suit.C));
+        handGameSet.add(new Card(8, Card.Suit.S));
+        Hand hand = new Hand(handGameSet);
+
+        String evaluateResult = hand.evaluate();
+
+        Assertions.assertEquals("three of kind : 10", evaluateResult);
+    }
+
 }
