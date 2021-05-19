@@ -19,7 +19,7 @@ public class Hand {
         if (fourOfKind != null) {
             return "three of kind : " + fourOfKind.getCardName();
         }
-        if (isFlush() == 1) {
+        if (isFlush()) {
             String flushOf = "flush of : " + evaluateHighCard().getCardName();
             return isConsecutive() ? "straight " + flushOf : flushOf;
         }
@@ -42,12 +42,11 @@ public class Hand {
         if (!cardPair.isEmpty()) {
             return "pair of : " + cardPair.get(0).getCardName();
         }
-        Card highCard = evaluateHighCard();
-        return "high card: " + highCard.getCardName();
+        return "high card: " + evaluateHighCard().getCardName();
     }
 
-    private long isFlush() {
-        return handGame.stream().map(Card::getSuit).distinct().count();
+    private boolean isFlush() {
+        return handGame.stream().map(Card::getSuit).distinct().count() == 1;
     }
 
     private boolean isConsecutive() {
@@ -81,5 +80,10 @@ public class Hand {
 
     private Card evaluateHighCard() {
         return handGame.stream().max(Comparator.comparingInt(Card::getValue)).orElse(null);
+    }
+
+    @Override
+    public String toString() {
+        return this.handGame.stream().map(Card::getCard).collect(Collectors.joining(" "));
     }
 }
