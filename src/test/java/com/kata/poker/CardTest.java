@@ -32,4 +32,9 @@ class CardTest {
         Assertions.assertEquals("AD", result);
     }
 
+    @Test
+    void should_throw_exception_bad_range() {
+       Assertions.assertThrows(IllegalArgumentException.class, () -> new Card(50, Card.Suit.D));
+    }
+
 }

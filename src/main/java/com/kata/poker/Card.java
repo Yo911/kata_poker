@@ -28,6 +28,9 @@ public class Card {
     private Suit suit;
 
     public Card(int value, Suit suit) {
+        if (cards.get(value) == null) {
+            throw new IllegalArgumentException("Illegal argument, cards value should be between 1 and 13, the current value is " + value);
+        }
         this.value = value;
         this.suit = suit;
     }
