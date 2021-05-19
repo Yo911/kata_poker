@@ -203,4 +203,19 @@ class HandTest {
         Assertions.assertEquals("three of kind : 10", evaluateResult);
     }
 
+    @Test
+    void should_return_straight_flush_of_10_when_evaluate_hand() {
+        Set<Card> handGameSet = new HashSet<>();
+        handGameSet.add(new Card(4, Card.Suit.H));
+        handGameSet.add(new Card(5, Card.Suit.H));
+        handGameSet.add(new Card(6, Card.Suit.H));
+        handGameSet.add(new Card(7, Card.Suit.H));
+        handGameSet.add(new Card(8, Card.Suit.H));
+        Hand hand = new Hand(handGameSet);
+
+        String evaluateResult = hand.evaluate();
+
+        Assertions.assertEquals("straight flush of : 10", evaluateResult);
+    }
+
 }

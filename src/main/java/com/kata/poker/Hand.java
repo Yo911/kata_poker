@@ -20,7 +20,8 @@ public class Hand {
             return "three of kind : " + fourOfKind.getCardName();
         }
         if (isFlush() == 1) {
-            return "flush of : " + evaluateHighCard().getCardName();
+            String flushOf = "flush of : " + evaluateHighCard().getCardName();
+            return isConsecutive() ? "straight " + flushOf : flushOf;
         }
         if (isConsecutive()) {
             return "straight of : " + evaluateHighCard().getCardName();
