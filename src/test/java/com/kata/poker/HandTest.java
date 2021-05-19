@@ -95,7 +95,7 @@ class HandTest {
 
         String evaluateResult = hand.evaluate();
 
-        Assertions.assertEquals("two pair of : 7 and 5", evaluateResult);
+        Assertions.assertEquals("two pair of : 5 and 7", evaluateResult);
     }
 
     @Test
@@ -110,7 +110,7 @@ class HandTest {
 
         String evaluateResult = hand.evaluate();
 
-        Assertions.assertEquals("two pair of : Ace and Queen", evaluateResult);
+        Assertions.assertEquals("two pair of : Queen and Ace", evaluateResult);
     }
 
     @Test
