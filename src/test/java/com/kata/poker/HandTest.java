@@ -11,11 +11,11 @@ class HandTest {
     @Test
     void should_return_ace_high_when_evaluate_hand() {
         Set<Card> handGameSet = new HashSet<>();
-        handGameSet.add(new Card(1, Card.Suit.S));
-        handGameSet.add(new Card(2, Card.Suit.C));
-        handGameSet.add(new Card(5, Card.Suit.S));
-        handGameSet.add(new Card(11, Card.Suit.D));
-        handGameSet.add(new Card(8, Card.Suit.H));
+        handGameSet.add(new Card(12, Card.Suit.S));
+        handGameSet.add(new Card(0, Card.Suit.C));
+        handGameSet.add(new Card(3, Card.Suit.S));
+        handGameSet.add(new Card(9, Card.Suit.D));
+        handGameSet.add(new Card(6, Card.Suit.H));
         Hand hand = new Hand(handGameSet);
 
         String evaluateResult = hand.evaluate();
@@ -26,11 +26,11 @@ class HandTest {
     @Test
     void should_return_king_high_when_evaluate_hand() {
         Set<Card> handGameSet = new HashSet<>();
-        handGameSet.add(new Card(13, Card.Suit.S));
-        handGameSet.add(new Card(2, Card.Suit.C));
-        handGameSet.add(new Card(5, Card.Suit.S));
-        handGameSet.add(new Card(11, Card.Suit.D));
-        handGameSet.add(new Card(8, Card.Suit.H));
+        handGameSet.add(new Card(11, Card.Suit.S));
+        handGameSet.add(new Card(0, Card.Suit.C));
+        handGameSet.add(new Card(3, Card.Suit.S));
+        handGameSet.add(new Card(9, Card.Suit.D));
+        handGameSet.add(new Card(6, Card.Suit.H));
         Hand hand = new Hand(handGameSet);
 
         String evaluateResult = hand.evaluate();
@@ -41,11 +41,11 @@ class HandTest {
     @Test
     void should_return_7_high_when_evaluate_hand() {
         Set<Card> handGameSet = new HashSet<>();
-        handGameSet.add(new Card(7, Card.Suit.S));
-        handGameSet.add(new Card(6, Card.Suit.C));
         handGameSet.add(new Card(5, Card.Suit.S));
-        handGameSet.add(new Card(4, Card.Suit.D));
-        handGameSet.add(new Card(2, Card.Suit.H));
+        handGameSet.add(new Card(4, Card.Suit.C));
+        handGameSet.add(new Card(3, Card.Suit.S));
+        handGameSet.add(new Card(2, Card.Suit.D));
+        handGameSet.add(new Card(0, Card.Suit.H));
         Hand hand = new Hand(handGameSet);
 
         String evaluateResult = hand.evaluate();
@@ -56,11 +56,11 @@ class HandTest {
     @Test
     void should_return_pair_of_7_when_evaluate_hand() {
         Set<Card> handGameSet = new HashSet<>();
-        handGameSet.add(new Card(7, Card.Suit.S));
-        handGameSet.add(new Card(7, Card.Suit.C));
         handGameSet.add(new Card(5, Card.Suit.S));
-        handGameSet.add(new Card(4, Card.Suit.D));
-        handGameSet.add(new Card(2, Card.Suit.H));
+        handGameSet.add(new Card(5, Card.Suit.C));
+        handGameSet.add(new Card(3, Card.Suit.S));
+        handGameSet.add(new Card(2, Card.Suit.D));
+        handGameSet.add(new Card(0, Card.Suit.H));
         Hand hand = new Hand(handGameSet);
 
         String evaluateResult = hand.evaluate();
@@ -71,11 +71,11 @@ class HandTest {
     @Test
     void should_return_pair_of_jack_when_evaluate_hand() {
         Set<Card> handGameSet = new HashSet<>();
-        handGameSet.add(new Card(11, Card.Suit.S));
-        handGameSet.add(new Card(11, Card.Suit.C));
-        handGameSet.add(new Card(5, Card.Suit.S));
-        handGameSet.add(new Card(4, Card.Suit.D));
-        handGameSet.add(new Card(2, Card.Suit.H));
+        handGameSet.add(new Card(9, Card.Suit.S));
+        handGameSet.add(new Card(9, Card.Suit.C));
+        handGameSet.add(new Card(3, Card.Suit.S));
+        handGameSet.add(new Card(2, Card.Suit.D));
+        handGameSet.add(new Card(0, Card.Suit.H));
         Hand hand = new Hand(handGameSet);
 
         String evaluateResult = hand.evaluate();
@@ -86,11 +86,11 @@ class HandTest {
     @Test
     void should_return_two_pair_of_5_and_7_when_evaluate_hand() {
         Set<Card> handGameSet = new HashSet<>();
-        handGameSet.add(new Card(5, Card.Suit.S));
-        handGameSet.add(new Card(7, Card.Suit.C));
-        handGameSet.add(new Card(5, Card.Suit.S));
-        handGameSet.add(new Card(7, Card.Suit.D));
-        handGameSet.add(new Card(2, Card.Suit.H));
+        handGameSet.add(new Card(3, Card.Suit.S));
+        handGameSet.add(new Card(5, Card.Suit.C));
+        handGameSet.add(new Card(3, Card.Suit.S));
+        handGameSet.add(new Card(5, Card.Suit.D));
+        handGameSet.add(new Card(0, Card.Suit.H));
         Hand hand = new Hand(handGameSet);
 
         String evaluateResult = hand.evaluate();
@@ -101,11 +101,11 @@ class HandTest {
     @Test
     void should_return_two_pair_of_queen_and_ace_when_evaluate_hand() {
         Set<Card> handGameSet = new HashSet<>();
-        handGameSet.add(new Card(1, Card.Suit.S));
-        handGameSet.add(new Card(12, Card.Suit.C));
         handGameSet.add(new Card(12, Card.Suit.S));
-        handGameSet.add(new Card(1, Card.Suit.D));
-        handGameSet.add(new Card(2, Card.Suit.H));
+        handGameSet.add(new Card(10, Card.Suit.C));
+        handGameSet.add(new Card(10, Card.Suit.S));
+        handGameSet.add(new Card(12, Card.Suit.D));
+        handGameSet.add(new Card(0, Card.Suit.H));
         Hand hand = new Hand(handGameSet);
 
         String evaluateResult = hand.evaluate();

@@ -7,7 +7,7 @@ class CardTest {
 
     @Test
     void should_return_5H_when_get_card() {
-        Card card = new Card(5, Card.Suit.H);
+        Card card = new Card(3, Card.Suit.H);
 
         String result = card.getCard();
 
@@ -16,7 +16,7 @@ class CardTest {
 
     @Test
     void should_return_6C_when_get_card() {
-        Card card = new Card(6, Card.Suit.C);
+        Card card = new Card(4, Card.Suit.C);
 
         String result = card.getCard();
 
@@ -25,7 +25,7 @@ class CardTest {
 
     @Test
     void should_return_AD_when_get_card() {
-        Card card = new Card(1, Card.Suit.D);
+        Card card = new Card(12, Card.Suit.D);
 
         String result = card.getCard();
 
@@ -34,7 +34,7 @@ class CardTest {
 
     @Test
     void should_return_ace_when_get_card_name() {
-        Card card = new Card(1, Card.Suit.D);
+        Card card = new Card(12, Card.Suit.D);
 
         String result = card.getCardName();
 
@@ -43,7 +43,7 @@ class CardTest {
 
     @Test
     void should_return_king_when_get_card_name() {
-        Card card = new Card(13, Card.Suit.D);
+        Card card = new Card(11, Card.Suit.D);
 
         String result = card.getCardName();
 
@@ -52,7 +52,7 @@ class CardTest {
 
     @Test
     void should_return_10_and_when_get_card_name() {
-        Card card = new Card(10, Card.Suit.D);
+        Card card = new Card(8, Card.Suit.D);
 
         String result = card.getCardName();
 

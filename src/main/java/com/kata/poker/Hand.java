@@ -41,12 +41,7 @@ public class Hand {
     }
 
     private Card evaluateHighCard() {
-        Optional<Card> cardOptional = handGame.stream()
-                .filter(c -> c.getValue() == 1).findAny();
-        if (cardOptional.isEmpty()) {
-            cardOptional = handGame.stream().max(Comparator.comparingInt(Card::getValue));
-        }
-        return cardOptional.orElse(null);
+        return handGame.stream().max(Comparator.comparingInt(Card::getValue)).orElse(null);
     }
 
 }

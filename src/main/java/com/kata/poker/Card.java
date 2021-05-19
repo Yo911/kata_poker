@@ -10,19 +10,19 @@ public class Card {
     private static final Map<String, String> cardName = new HashMap<>();
 
     static {
-        cards.put(2, "2");
-        cards.put(3, "3");
-        cards.put(4, "4");
-        cards.put(5, "5");
-        cards.put(6, "6");
-        cards.put(7, "7");
-        cards.put(8, "8");
-        cards.put(9, "9");
-        cards.put(10, "T");
-        cards.put(11, "J");
-        cards.put(12, "Q");
-        cards.put(13, "K");
-        cards.put(1, "A");
+        cards.put(0, "2");
+        cards.put(1, "3");
+        cards.put(2, "4");
+        cards.put(3, "5");
+        cards.put(4, "6");
+        cards.put(5, "7");
+        cards.put(6, "8");
+        cards.put(7, "9");
+        cards.put(8, "T");
+        cards.put(9, "J");
+        cards.put(10, "Q");
+        cards.put(11, "K");
+        cards.put(12, "A");
 
         cardName.put("T", "10");
         cardName.put("J", "Jack");
