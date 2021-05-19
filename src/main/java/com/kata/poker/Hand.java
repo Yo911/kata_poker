@@ -15,11 +15,7 @@ public class Hand {
     }
 
     public String evaluate() {
-        boolean isConsecutive = true;
-        for (int i = values.size() - 1; i > 0; i--) {
-            isConsecutive &= values.get(i) == values.get(i - 1) + 1;
-        }
-        if (isConsecutive) {
+        if (isConsecutive()) {
             return "straight of : " + evaluateHighCard().getCardName();
         }
         Card threeOfKind = getThreeOfKind();
@@ -36,6 +32,14 @@ public class Hand {
         }
         Card highCard = evaluateHighCard();
         return "high card: " + highCard.getCardName();
+    }
+
+    private boolean isConsecutive() {
+        boolean isConsecutive = true;
+        for (int i = values.size() - 1; i > 0; i--) {
+            isConsecutive &= values.get(i) == values.get(i - 1) + 1;
+        }
+        return isConsecutive;
     }
 
     private Card getCardFromValue(int paireValue) {
