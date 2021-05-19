@@ -23,15 +23,24 @@ public class Card {
         cards.put(1, "A");
     }
 
+    private int value;
+
+    private Suit suit;
+
     public Card(int value, Suit suit) {
+        this.value = value;
+        this.suit = suit;
     }
 
     public String getCard() {
-        return "5H";
+        return cards.get(value) + suit.note;
     }
 
     public enum Suit {
-        H("H", "Heart");
+        H("H", "Heart"),
+        C("C", "Clubs"),
+        D("D", "Diamond"),
+        S("S", "Spade");
 
         private final String note;
         private final String label;

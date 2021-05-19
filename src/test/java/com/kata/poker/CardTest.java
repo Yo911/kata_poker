@@ -14,4 +14,22 @@ class CardTest {
         Assertions.assertEquals("5H", result);
     }
 
+    @Test
+    void should_return_6C_when_get_card() {
+        Card card = new Card(6, Card.Suit.C);
+
+        String result = card.getCard();
+
+        Assertions.assertEquals("6C", result);
+    }
+
+    @Test
+    void should_return_AD_when_get_card() {
+        Card card = new Card(1, Card.Suit.D);
+
+        String result = card.getCard();
+
+        Assertions.assertEquals("AD", result);
+    }
+
 }
