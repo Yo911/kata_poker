@@ -11,6 +11,14 @@ public class Hand {
     }
 
     public String evaluate() {
+        List<Integer> values = this.handGame.stream().map(Card::getValue).collect(Collectors.toList());
+        List<String> paires = values.stream()
+                .filter(val -> Collections.frequency(values, val) == 2)
+                .map(String::valueOf).distinct()
+                .collect(Collectors.toList());
+        if (paires.size() == 2) {
+            return "two pair of : " + String.join(" and ", paires);
+        }
         Card cardPair = evaluateCardPair();
         if (cardPair != null) {
             return "pair of : " + cardPair.getCardName();
@@ -21,13 +29,16 @@ public class Hand {
 
     private Card evaluateCardPair() {
         List<Integer> values = this.handGame.stream().map(Card::getValue).collect(Collectors.toList());
-        Optional<Integer> optionalPairValue = values.stream().filter(val -> Collections.frequency(values, val) == 2).findFirst();
+        Optional<Integer> optionalPairValue = values.stream()
+                .filter(val -> Collections.frequency(values, val) == 2).findFirst();
         return optionalPairValue.isEmpty() ? null :
-                this.handGame.stream().filter(c -> c.getValue() == optionalPairValue.get()).findFirst().orElse(null);
+                this.handGame.stream()
+                        .filter(c -> c.getValue() == optionalPairValue.get()).findFirst().orElse(null);
     }
 
     private Card evaluateHighCard() {
-        Optional<Card> cardOptional = handGame.stream().filter(c -> c.getValue() == 1).findAny();
+        Optional<Card> cardOptional = handGame.stream()
+                .filter(c -> c.getValue() == 1).findAny();
         if (cardOptional.isEmpty()) {
             cardOptional = handGame.stream().max(Comparator.comparingInt(Card::getValue));
         }

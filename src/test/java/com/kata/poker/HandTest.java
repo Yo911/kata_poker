@@ -83,4 +83,19 @@ class HandTest {
         Assertions.assertEquals("pair of : Jack", evaluateResult);
     }
 
+    @Test
+    void should_return_two_pair_of_5_and_7_when_evaluate_hand() {
+        Set<Card> handGameSet = new HashSet<>();
+        handGameSet.add(new Card(5, Card.Suit.S));
+        handGameSet.add(new Card(7, Card.Suit.C));
+        handGameSet.add(new Card(5, Card.Suit.S));
+        handGameSet.add(new Card(7, Card.Suit.D));
+        handGameSet.add(new Card(2, Card.Suit.H));
+        Hand hand = new Hand(handGameSet);
+
+        String evaluateResult = hand.evaluate();
+
+        Assertions.assertEquals("two pair of : 7 and 5", evaluateResult);
+    }
+
 }
