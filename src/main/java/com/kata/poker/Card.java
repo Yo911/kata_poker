@@ -43,6 +43,10 @@ public class Card {
         this.suit = suit;
     }
 
+    public int getValue() {
+        return value;
+    }
+
     public String getCard() {
         return cards.get(value) + suit.note;
     }
