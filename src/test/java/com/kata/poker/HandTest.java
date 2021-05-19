@@ -128,4 +128,19 @@ class HandTest {
         Assertions.assertEquals("three of kind : 3", evaluateResult);
     }
 
+    @Test
+    void should_return_straingth_of_6_when_evaluate_hand() {
+        Set<Card> handGameSet = new HashSet<>();
+        handGameSet.add(new Card(0, Card.Suit.S));
+        handGameSet.add(new Card(1, Card.Suit.C));
+        handGameSet.add(new Card(2, Card.Suit.S));
+        handGameSet.add(new Card(3, Card.Suit.D));
+        handGameSet.add(new Card(4, Card.Suit.H));
+        Hand hand = new Hand(handGameSet);
+
+        String evaluateResult = hand.evaluate();
+
+        Assertions.assertEquals("straight of : 6", evaluateResult);
+    }
+
 }

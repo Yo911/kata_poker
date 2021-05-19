@@ -11,10 +11,17 @@ public class Hand {
 
     public Hand(Set<Card> handGame) {
         this.handGame = handGame;
-        this.values = handGame.stream().map(Card::getValue).collect(Collectors.toList());
+        this.values = handGame.stream().map(Card::getValue).sorted().collect(Collectors.toList());
     }
 
     public String evaluate() {
+        boolean isConsecutive = true;
+        for (int i = values.size() - 1; i > 0; i--) {
+            isConsecutive &= values.get(i) == values.get(i - 1) + 1;
+        }
+        if (isConsecutive) {
+            return "straight of : " + evaluateHighCard().getCardName();
+        }
         Card threeOfKind = getThreeOfKind();
         if (threeOfKind != null) {
             return "three of kind : " + threeOfKind.getCardName();
