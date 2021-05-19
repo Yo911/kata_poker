@@ -1,8 +1,7 @@
 package com.kata.poker;
 
-import java.util.Comparator;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Hand {
     Set<Card> handGame;
@@ -12,6 +11,11 @@ public class Hand {
     }
 
     public String evaluate() {
+        List<Integer> values = this.handGame.stream().map(Card::getValue).collect(Collectors.toList());
+        Optional<Integer> optionalPairValue = values.stream().filter(val -> Collections.frequency(values, val) == 2).findFirst();
+        if (optionalPairValue.isPresent()) {
+            return "pair of : " + optionalPairValue.get();
+        }
         Card highCard = evaluateHighCard();
         return "high card: " + highCard.getCardName();
     }
