@@ -11,14 +11,19 @@ public class Hand {
     }
 
     public String evaluate() {
-        List<Integer> values = this.handGame.stream().map(Card::getValue).collect(Collectors.toList());
-        Optional<Integer> optionalPairValue = values.stream().filter(val -> Collections.frequency(values, val) == 2).findFirst();
-        if (optionalPairValue.isPresent()) {
-            Card card = this.handGame.stream().filter(c -> c.getValue() == optionalPairValue.get()).findFirst().orElse(null);
-            return "pair of : " + card.getCardName();
+        Card cardPair = evaluateCardPair();
+        if (cardPair != null) {
+            return "pair of : " + cardPair.getCardName();
         }
         Card highCard = evaluateHighCard();
         return "high card: " + highCard.getCardName();
+    }
+
+    private Card evaluateCardPair() {
+        List<Integer> values = this.handGame.stream().map(Card::getValue).collect(Collectors.toList());
+        Optional<Integer> optionalPairValue = values.stream().filter(val -> Collections.frequency(values, val) == 2).findFirst();
+        return optionalPairValue.isEmpty() ? null :
+                this.handGame.stream().filter(c -> c.getValue() == optionalPairValue.get()).findFirst().orElse(null);
     }
 
     private Card evaluateHighCard() {
