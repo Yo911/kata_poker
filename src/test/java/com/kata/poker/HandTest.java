@@ -113,4 +113,19 @@ class HandTest {
         Assertions.assertEquals("two pair of : Ace and Queen", evaluateResult);
     }
 
+    @Test
+    void should_return_three_of_kind_of_3_when_evaluate_hand() {
+        Set<Card> handGameSet = new HashSet<>();
+        handGameSet.add(new Card(1, Card.Suit.S));
+        handGameSet.add(new Card(1, Card.Suit.C));
+        handGameSet.add(new Card(12, Card.Suit.S));
+        handGameSet.add(new Card(1, Card.Suit.D));
+        handGameSet.add(new Card(0, Card.Suit.H));
+        Hand hand = new Hand(handGameSet);
+
+        String evaluateResult = hand.evaluate();
+
+        Assertions.assertEquals("three of kind : 3", evaluateResult);
+    }
+
 }
