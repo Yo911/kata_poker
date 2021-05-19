@@ -15,14 +15,21 @@ public class Hand {
     }
 
     public String evaluate() {
+        if (isFlush() == 1) {
+            return "flush of : " + evaluateHighCard().getCardName();
+        }
         if (isConsecutive()) {
             return "straight of : " + evaluateHighCard().getCardName();
         }
         Card threeOfKind = getThreeOfKind();
-        if (threeOfKind != null) {
-            return "three of kind : " + threeOfKind.getCardName();
-        }
         List<Integer> paires = getPaires();
+        if (threeOfKind != null) {
+            if (!paires.isEmpty()) {
+                return "full of : " + threeOfKind.getCardName() + " over " + getCardFromValue(paires.get(0)).getCardName();
+            }
+            return "three of kind : " + threeOfKind.getCardName();
+
+        }
         List<Card> cardPair = paires.stream().sorted().map(this::getCardFromValue).collect(Collectors.toList());
         if (cardPair.size() == 2) {
             return "two pair of : " + cardPair.stream().map(Card::getCardName).collect(Collectors.joining(" and "));
@@ -32,6 +39,10 @@ public class Hand {
         }
         Card highCard = evaluateHighCard();
         return "high card: " + highCard.getCardName();
+    }
+
+    private long isFlush() {
+        return handGame.stream().map(Card::getSuit).distinct().count();
     }
 
     private boolean isConsecutive() {

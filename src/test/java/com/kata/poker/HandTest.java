@@ -158,4 +158,34 @@ class HandTest {
         Assertions.assertEquals("straight of : Queen", evaluateResult);
     }
 
+    @Test
+    void should_return_flush_of_queen_when_evaluate_hand() {
+        Set<Card> handGameSet = new HashSet<>();
+        handGameSet.add(new Card(6, Card.Suit.S));
+        handGameSet.add(new Card(7, Card.Suit.S));
+        handGameSet.add(new Card(8, Card.Suit.S));
+        handGameSet.add(new Card(2, Card.Suit.S));
+        handGameSet.add(new Card(10, Card.Suit.S));
+        Hand hand = new Hand(handGameSet);
+
+        String evaluateResult = hand.evaluate();
+
+        Assertions.assertEquals("flush of : Queen", evaluateResult);
+    }
+
+    @Test
+    void should_return_full_of_10_by_8_when_evaluate_hand() {
+        Set<Card> handGameSet = new HashSet<>();
+        handGameSet.add(new Card(6, Card.Suit.S));
+        handGameSet.add(new Card(6, Card.Suit.H));
+        handGameSet.add(new Card(8, Card.Suit.D));
+        handGameSet.add(new Card(8, Card.Suit.C));
+        handGameSet.add(new Card(8, Card.Suit.S));
+        Hand hand = new Hand(handGameSet);
+
+        String evaluateResult = hand.evaluate();
+
+        Assertions.assertEquals("full of : 10 over 8", evaluateResult);
+    }
+
 }

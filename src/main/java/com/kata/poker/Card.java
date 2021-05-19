@@ -47,6 +47,10 @@ public class Card {
         return value;
     }
 
+    public Suit getSuit() {
+        return suit;
+    }
+
     public String getCard() {
         return cards.get(value) + suit.note;
     }
