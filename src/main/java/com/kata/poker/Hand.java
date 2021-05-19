@@ -12,12 +12,17 @@ public class Hand {
 
     public String evaluate() {
         List<Integer> values = this.handGame.stream().map(Card::getValue).collect(Collectors.toList());
-        List<String> paires = values.stream()
+        List<Integer> paires = values.stream()
                 .filter(val -> Collections.frequency(values, val) == 2)
-                .map(String::valueOf).distinct()
+                .distinct()
                 .collect(Collectors.toList());
         if (paires.size() == 2) {
-            return "two pair of : " + String.join(" and ", paires);
+            List<String> pairesString = new ArrayList<>(2);
+            for (int pair : paires) {
+                pairesString.add(this.handGame.stream()
+                        .filter(c -> c.getValue() == pair).map(Card::getCardName).findFirst().orElse(null));
+            }
+            return "two pair of : " + String.join(" and ", pairesString);
         }
         Card cardPair = evaluateCardPair();
         if (cardPair != null) {
