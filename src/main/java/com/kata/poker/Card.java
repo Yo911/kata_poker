@@ -7,6 +7,8 @@ public class Card {
 
     private static final Map<Integer, String> cards = new HashMap<>();
 
+    private static final Map<String, String> cardName = new HashMap<>();
+
     static {
         cards.put(2, "2");
         cards.put(3, "3");
@@ -21,6 +23,12 @@ public class Card {
         cards.put(12, "Q");
         cards.put(13, "K");
         cards.put(1, "A");
+
+        cardName.put("T", "10");
+        cardName.put("J", "Jack");
+        cardName.put("Q", "Queen");
+        cardName.put("K", "King");
+        cardName.put("A", "Ace");
     }
 
     private int value;
@@ -37,6 +45,11 @@ public class Card {
 
     public String getCard() {
         return cards.get(value) + suit.note;
+    }
+
+    public String getCardName() {
+        String card = cards.get(value);
+        return cardName.getOrDefault(card, card);
     }
 
     public enum Suit {

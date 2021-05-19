@@ -33,6 +33,34 @@ class CardTest {
     }
 
     @Test
+    void should_return_ace_when_get_card_name() {
+        Card card = new Card(1, Card.Suit.D);
+
+        String result = card.getCardName();
+
+        Assertions.assertEquals("Ace", result);
+    }
+
+    @Test
+    void should_return_king_when_get_card_name() {
+        Card card = new Card(13, Card.Suit.D);
+
+        String result = card.getCardName();
+
+        Assertions.assertEquals("King", result);
+    }
+
+    @Test
+    void should_return_10_and_when_get_card_name() {
+        Card card = new Card(10, Card.Suit.D);
+
+        String result = card.getCardName();
+
+        Assertions.assertEquals("10", result);
+        Assertions.assertEquals("TD", card.getCard());
+    }
+
+    @Test
     void should_throw_exception_bad_range() {
        Assertions.assertThrows(IllegalArgumentException.class, () -> new Card(50, Card.Suit.D));
     }
