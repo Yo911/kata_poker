@@ -19,18 +19,16 @@ public class Player {
         String player2Hand = player2.hand.evaluate();
         String playerHand = this.hand.evaluate();
 
-        String winHand;
-        Player winPlayer;
+        Boolean isWinner = this.hand.isBetterThan(player2.hand);
 
-        if (player2.hand.getRank().getRankValue() > this.hand.getRank().getRankValue()) {
-            winHand = player2Hand;
-            winPlayer = player2;
-        } else {
-            winHand = playerHand;
-            winPlayer = this;
+        if (isWinner == null) {
+            return "Tie.";
         }
 
-        return getWinner(winPlayer, winHand);
+        return isWinner ?
+                getWinner(this, playerHand) :
+                getWinner(player2, player2Hand)
+                ;
     }
 
     private String getWinner(Player player, String handPlayed) {

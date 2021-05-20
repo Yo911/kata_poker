@@ -25,4 +25,14 @@ class PlayerTest {
         Assertions.assertEquals("Black wins. - with three of kind : 5", winner);
     }
 
+    @Test
+    void should_return_equality_when_same_hand() {
+        Player player1 = new Player("Black", "3S 5C 6H JD AD");
+        Player player2 = new Player("White", "3H 5D 6C JH AC");
+
+        String winner = player1.compareHand(player2);
+
+        Assertions.assertEquals("Tie.", winner);
+    }
+
 }
