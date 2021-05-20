@@ -232,4 +232,9 @@ class HandTest {
         Assertions.assertEquals(Rank.STRAIGHT_FLUSH.getRankValue(), hand.getRank().getRankValue());
     }
 
+    @Test
+    void should_failed_when_get_hand_from_string() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new Hand("5S 4D"));
+    }
+
 }

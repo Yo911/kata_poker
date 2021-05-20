@@ -4,6 +4,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Hand {
+    public static final String SEPARATOR = " ";
+
     private Set<Card> handGame;
 
     private List<Integer> values;
@@ -13,8 +15,15 @@ public class Hand {
     private String winsCards;
 
     public Hand(Set<Card> handGame) {
+        if (handGame == null || handGame.size() != 5) {
+            throw new IllegalArgumentException("a Hand should have 5 card");
+        }
         this.handGame = handGame;
         this.values = handGame.stream().map(Card::getValue).sorted().collect(Collectors.toList());
+    }
+
+    public Hand(String hand) {
+        this(Arrays.stream(hand.split(SEPARATOR)).map(Card::new).collect(Collectors.toSet()));
     }
 
     public Rank getRank() {
@@ -22,12 +31,10 @@ public class Hand {
     }
 
     public String evaluate() {
-        String wins;
         for (Rank value : Rank.values()) {
-            wins = value.evaluate(this.handGame, this.values);
-            if (wins != null) {
+            this.winsCards = value.evaluate(this.handGame, this.values);
+            if (this.winsCards != null) {
                 this.rank = value;
-                this.winsCards = wins;
                 return getHandEvaluation();
             }
         }
