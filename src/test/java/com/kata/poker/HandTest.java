@@ -287,4 +287,14 @@ class HandTest {
         Assertions.assertTrue(hand.isBetterThan(adverse));
     }
 
+    @Test
+    void should_return_null_when_same_hand() {
+        Hand hand = new Hand("3S 5C 6H JD AD");
+        Hand adverse = new Hand("3H 5D 6C JH AC");
+        hand.evaluate();
+        adverse.evaluate();
+
+        Assertions.assertNull(hand.isBetterThan(adverse));
+    }
+
 }

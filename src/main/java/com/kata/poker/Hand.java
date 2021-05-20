@@ -44,7 +44,7 @@ public class Hand {
         return null;
     }
 
-    public boolean isBetterThan(Hand adverseHand) {
+    public Boolean isBetterThan(Hand adverseHand) {
         if (this.rank.getRankValue() != adverseHand.rank.getRankValue()) {
             return this.rank.getRankValue() > adverseHand.rank.getRankValue();
         }
@@ -57,7 +57,7 @@ public class Hand {
             }
         }
 
-        return false;
+        return null;
     }
 
     private String getHandEvaluation() {
