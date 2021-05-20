@@ -65,4 +65,25 @@ class CardTest {
        Assertions.assertThrows(IllegalArgumentException.class, () -> new Card(50, Card.Suit.D));
     }
 
+    @Test
+    void should_get_card_from_string() {
+        Card card = new Card("TS");
+
+        String result = card.getCardName();
+
+        Assertions.assertEquals("10", result);
+        Assertions.assertEquals("TS", card.getCard());
+        Assertions.assertEquals(Card.Suit.S, card.getSuit());
+    }
+
+    @Test
+    void  should_failed_to_get_card_doesnt_exist() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new Card("*P"));
+    }
+
+    @Test
+    void  should_failed_to_get_card_with_suit_doesnt_exist() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new Card("9P"));
+    }
+
 }

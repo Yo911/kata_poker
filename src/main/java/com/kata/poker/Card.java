@@ -43,6 +43,17 @@ public class Card {
         this.suit = suit;
     }
 
+    public Card(final String card) {
+        this.value = cards.entrySet().stream()
+                .filter(entry -> entry.getValue().equals(card.substring(0, 1)))
+                .map(Map.Entry::getKey)
+                .findFirst().orElse(-1);
+        this.suit = Suit.valueOf(card.substring(1));
+        if (this.value < 0) {
+            throw new IllegalArgumentException("Illegal argument, cards value should be between 1 and 13, the current value is " + value);
+        }
+    }
+
     public int getValue() {
         return value;
     }
