@@ -277,4 +277,14 @@ class HandTest {
         Assertions.assertFalse(hand.isBetterThan(adverse));
     }
 
+    @Test
+    void should_return_true_when_test_if_is_better_than_adverse_hand_and_high() {
+        Hand hand = new Hand("3S 5C 6H JD AD");
+        Hand adverse = new Hand("2S 5D 6C JH AC");
+        hand.evaluate();
+        adverse.evaluate();
+
+        Assertions.assertTrue(hand.isBetterThan(adverse));
+    }
+
 }
