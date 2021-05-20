@@ -12,7 +12,7 @@ public enum Rank {
         }
 
         @Override
-        public String evaluate(Set<Card> handGame, List<Integer> values) {
+        public String evaluate(Set<Card> handGame, List<Integer> values, List<Integer> highestCards) {
             if (isConsecutive(values) && isFlush(handGame)) {
                 return evaluateHighCard(handGame).getCardName();
             }
@@ -26,7 +26,7 @@ public enum Rank {
         }
 
         @Override
-        public String evaluate(Set<Card> handGame, List<Integer> values) {
+        public String evaluate(Set<Card> handGame, List<Integer> values, List<Integer> highestCards) {
             Card numbersOfKind = getNumbersOfKind(handGame, values, 4);
             return numbersOfKind != null ? numbersOfKind.getCardName() : null;
         }
@@ -38,7 +38,7 @@ public enum Rank {
         }
 
         @Override
-        public String evaluate(Set<Card> handGame, List<Integer> values) {
+        public String evaluate(Set<Card> handGame, List<Integer> values, List<Integer> highestCards) {
             Card threeOfKind = getNumbersOfKind(handGame, values, 3);
             List<Integer> paires = getPaires(values);
             if (threeOfKind == null || paires.size() != 1) {
@@ -54,7 +54,7 @@ public enum Rank {
         }
 
         @Override
-        public String evaluate(Set<Card> handGame, List<Integer> values) {
+        public String evaluate(Set<Card> handGame, List<Integer> values, List<Integer> highestCards) {
             return isFlush(handGame) ? evaluateHighCard(handGame).getCardName() : null;
         }
     },
@@ -65,7 +65,7 @@ public enum Rank {
         }
 
         @Override
-        public String evaluate(Set<Card> handGame, List<Integer> values) {
+        public String evaluate(Set<Card> handGame, List<Integer> values, List<Integer> highestCards) {
             return isConsecutive(values) ? evaluateHighCard(handGame).getCardName() : null;
         }
     },
@@ -76,9 +76,13 @@ public enum Rank {
         }
 
         @Override
-        public String evaluate(Set<Card> handGame, List<Integer> values) {
+        public String evaluate(Set<Card> handGame, List<Integer> values, List<Integer> highestCards) {
             Card numbersOfKind = getNumbersOfKind(handGame, values, 3);
-            return numbersOfKind != null ? numbersOfKind.getCardName() : null;
+            if (numbersOfKind != null) {
+                highestCards.add(numbersOfKind.getValue());
+                return numbersOfKind.getCardName();
+            }
+            return null;
         }
     },
     TWO_PAIR(2) {
@@ -88,7 +92,7 @@ public enum Rank {
         }
 
         @Override
-        public String evaluate(Set<Card> handGame, List<Integer> values) {
+        public String evaluate(Set<Card> handGame, List<Integer> values, List<Integer> highestCards) {
             List<Integer> paires = getPaires(values);
             boolean b = paires.size() == 2;
             return paires.size() == 2 ? paires.stream().map(pair -> getCardFromValue(handGame, pair))
@@ -103,7 +107,7 @@ public enum Rank {
         }
 
         @Override
-        public String evaluate(Set<Card> handGame, List<Integer> values) {
+        public String evaluate(Set<Card> handGame, List<Integer> values, List<Integer> highestCards) {
             List<Integer> paires = getPaires(values);
             return paires.size() == 1 ? getCardFromValue(handGame, paires.get(0)).getCardName() : null;
         }
@@ -115,7 +119,7 @@ public enum Rank {
         }
 
         @Override
-        public String evaluate(Set<Card> handGame, List<Integer> values) {
+        public String evaluate(Set<Card> handGame, List<Integer> values, List<Integer> highestCards) {
             return evaluateHighCard(handGame).getCardName();
         }
     };
@@ -134,7 +138,7 @@ public enum Rank {
 
     public abstract String rankToString(String cards);
 
-    public abstract String evaluate(Set<Card> handGame, List<Integer> values);
+    public abstract String evaluate(Set<Card> handGame, List<Integer> values, List<Integer> highestCards);
 
     protected boolean isFlush(Set<Card> handGame) {
         return handGame.stream().map(Card::getSuit).distinct().count() == 1;

@@ -10,6 +10,8 @@ public class Hand {
 
     private List<Integer> values;
 
+    private List<Integer> highestCards;
+
     private Rank rank;
 
     private String winsCards;
@@ -20,6 +22,7 @@ public class Hand {
         }
         this.handGame = handGame;
         this.values = handGame.stream().map(Card::getValue).sorted().collect(Collectors.toList());
+        this.highestCards = new ArrayList<>(handGame.size());
     }
 
     public Hand(String hand) {
@@ -32,13 +35,27 @@ public class Hand {
 
     public String evaluate() {
         for (Rank value : Rank.values()) {
-            this.winsCards = value.evaluate(this.handGame, this.values);
+            this.winsCards = value.evaluate(this.handGame, this.values, this.highestCards);
             if (this.winsCards != null) {
                 this.rank = value;
                 return getHandEvaluation();
             }
         }
         return null;
+    }
+
+    public boolean isBetterThan(Hand adverseHand) {
+        if (this.rank.getRankValue() != adverseHand.rank.getRankValue()) {
+            return this.rank.getRankValue() > adverseHand.rank.getRankValue();
+        }
+
+        for (int i = 0; i < this.highestCards.size(); i++) {
+            Integer highCard = this.highestCards.get(i);
+            Integer adverseHighCard = adverseHand.highestCards.get(i);
+            return highCard > adverseHighCard;
+        }
+
+        return false;
     }
 
     private String getHandEvaluation() {

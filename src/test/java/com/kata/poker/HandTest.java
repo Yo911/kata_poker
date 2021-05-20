@@ -237,4 +237,34 @@ class HandTest {
         Assertions.assertThrows(IllegalArgumentException.class, () -> new Hand("5S 4D"));
     }
 
+    @Test
+    void should_return_false_when_test_if_is_better_than_adverse_hand() {
+        Hand hand = new Hand("2H 3D 5S 2C 2D");
+        Hand adverse = new Hand("2S 5D 5S 5C KD");
+        hand.evaluate();
+        adverse.evaluate();
+
+        Assertions.assertFalse(hand.isBetterThan(adverse));
+    }
+
+    @Test
+    void should_return_true_when_test_if_is_better_than_adverse_hand() {
+        Hand hand = new Hand("2S 5D 5S 5C KD");
+        Hand adverse = new Hand("2H 3D 5S 8C 2D");
+        hand.evaluate();
+        adverse.evaluate();
+
+        Assertions.assertTrue(hand.isBetterThan(adverse));
+    }
+
+    @Test
+    void should_return_true_when_test_if_is_better_than_adverse_hand_and_have_same_rank() {
+        Hand hand = new Hand("2S 5D 5S 5C KD");
+        Hand adverse = new Hand("2H 3D 5S 2C 2D");
+        hand.evaluate();
+        adverse.evaluate();
+
+        Assertions.assertTrue(hand.isBetterThan(adverse));
+    }
+
 }
