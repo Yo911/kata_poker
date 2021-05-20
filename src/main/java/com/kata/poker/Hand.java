@@ -52,7 +52,9 @@ public class Hand {
         for (int i = 0; i < this.highestCards.size(); i++) {
             Integer highCard = this.highestCards.get(i);
             Integer adverseHighCard = adverseHand.highestCards.get(i);
-            return highCard > adverseHighCard;
+            if (highCard != adverseHighCard) {
+                return highCard > adverseHighCard;
+            }
         }
 
         return false;

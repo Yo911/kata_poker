@@ -267,4 +267,14 @@ class HandTest {
         Assertions.assertTrue(hand.isBetterThan(adverse));
     }
 
+    @Test
+    void should_return_false_when_test_if_is_better_than_adverse_hand_and_have_same_pair() {
+        Hand hand = new Hand("2S 2D 3S 5C KD");
+        Hand adverse = new Hand("2H 3D 5S 2C AD");
+        hand.evaluate();
+        adverse.evaluate();
+
+        Assertions.assertFalse(hand.isBetterThan(adverse));
+    }
+
 }

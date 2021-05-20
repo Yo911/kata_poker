@@ -14,7 +14,9 @@ public enum Rank {
         @Override
         public String evaluate(Set<Card> handGame, List<Integer> values, List<Integer> highestCards) {
             if (isConsecutive(values) && isFlush(handGame)) {
-                return evaluateHighCard(handGame).getCardName();
+                Card card = evaluateHighCard(handGame);
+                highestCards.add(card.getValue());
+                return card.getCardName();
             }
             return null;
         }
@@ -27,8 +29,12 @@ public enum Rank {
 
         @Override
         public String evaluate(Set<Card> handGame, List<Integer> values, List<Integer> highestCards) {
-            Card numbersOfKind = getNumbersOfKind(handGame, values, 4);
-            return numbersOfKind != null ? numbersOfKind.getCardName() : null;
+            Card fourOfKind = getNumbersOfKind(handGame, values, 4);
+            if (fourOfKind != null) {
+                highestCards.add(fourOfKind.getValue());
+                return fourOfKind.getCardName();
+            }
+            return null;
         }
     },
     FULL(6) {
@@ -44,6 +50,8 @@ public enum Rank {
             if (threeOfKind == null || paires.size() != 1) {
                 return null;
             }
+            highestCards.add(threeOfKind.getValue());
+            highestCards.add(paires.get(0));
             return threeOfKind.getCardName() + " over " + getCardFromValue(handGame, paires.get(0)).getCardName();
         }
     },
@@ -55,7 +63,9 @@ public enum Rank {
 
         @Override
         public String evaluate(Set<Card> handGame, List<Integer> values, List<Integer> highestCards) {
-            return isFlush(handGame) ? evaluateHighCard(handGame).getCardName() : null;
+            Card card = evaluateHighCard(handGame);
+            highestCards.add(card.getValue());
+            return isFlush(handGame) ? card.getCardName() : null;
         }
     },
     STRAIGHT(4) {
@@ -66,6 +76,7 @@ public enum Rank {
 
         @Override
         public String evaluate(Set<Card> handGame, List<Integer> values, List<Integer> highestCards) {
+            copyValueReverseOrder(values, highestCards);
             return isConsecutive(values) ? evaluateHighCard(handGame).getCardName() : null;
         }
     },
@@ -94,10 +105,15 @@ public enum Rank {
         @Override
         public String evaluate(Set<Card> handGame, List<Integer> values, List<Integer> highestCards) {
             List<Integer> paires = getPaires(values);
-            boolean b = paires.size() == 2;
-            return paires.size() == 2 ? paires.stream().map(pair -> getCardFromValue(handGame, pair))
-                    .map(Card::getCardName)
-                    .collect(Collectors.joining(" and ")) : null;
+            if (paires.size() == 2) {
+                copyValueReverseOrder(values, highestCards);
+                highestCards.removeAll(paires);
+                paires.forEach(p -> highestCards.add(0, p));
+                return paires.stream().map(pair -> getCardFromValue(handGame, pair))
+                        .map(Card::getCardName)
+                        .collect(Collectors.joining(" and "));
+            }
+            return null;
         }
     },
     PAIR(1) {
@@ -109,7 +125,14 @@ public enum Rank {
         @Override
         public String evaluate(Set<Card> handGame, List<Integer> values, List<Integer> highestCards) {
             List<Integer> paires = getPaires(values);
-            return paires.size() == 1 ? getCardFromValue(handGame, paires.get(0)).getCardName() : null;
+            if (paires.size() == 1) {
+                copyValueReverseOrder(values, highestCards);
+                highestCards.removeAll(paires);
+                Integer onePaire = paires.get(0);
+                highestCards.add(0, onePaire);
+                return getCardFromValue(handGame, onePaire).getCardName();
+            }
+            return null;
         }
     },
     HIGH(0) {
@@ -120,6 +143,7 @@ public enum Rank {
 
         @Override
         public String evaluate(Set<Card> handGame, List<Integer> values, List<Integer> highestCards) {
+            copyValueReverseOrder(values, highestCards);
             return evaluateHighCard(handGame).getCardName();
         }
     };
@@ -175,5 +199,11 @@ public enum Rank {
 
     protected Card evaluateHighCard(Set<Card> handGame) {
         return handGame.stream().max(Comparator.comparingInt(Card::getValue)).orElse(null);
+    }
+
+    protected void copyValueReverseOrder(List<Integer> values, List<Integer> highest) {
+        highest.clear();
+        highest.addAll(values);
+        Collections.reverse(highest);
     }
 }
