@@ -6,9 +6,9 @@ import java.util.stream.Collectors;
 public class Hand {
     public static final String SEPARATOR = " ";
 
-    private Set<Card> handGame;
+    private final Set<Card> handGame;
 
-    private List<Integer> values;
+    private final List<Integer> values;
 
     private List<Integer> highestCards;
 
@@ -22,7 +22,6 @@ public class Hand {
         }
         this.handGame = handGame;
         this.values = handGame.stream().map(Card::getValue).sorted().collect(Collectors.toList());
-        this.highestCards = new ArrayList<>(handGame.size());
     }
 
     public Hand(String hand) {
@@ -33,9 +32,18 @@ public class Hand {
         return rank;
     }
 
+    public List<Integer> getValues() {
+        return values;
+    }
+
+    public Set<Card> getHandGame() {
+        return handGame;
+    }
+
     public String evaluate() {
         for (Rank value : Rank.values()) {
-            this.winsCards = value.evaluate(this.handGame, this.values, this.highestCards);
+            this.winsCards = value.evaluate(this);
+            this.highestCards = value.getRanking().getValuesfromHighest();
             if (this.winsCards != null) {
                 this.rank = value;
                 return getHandEvaluation();
@@ -61,7 +69,7 @@ public class Hand {
     }
 
     private String getHandEvaluation() {
-        return this.rank.rankToString(this.winsCards);
+        return this.rank.getRankString() + ": " + this.winsCards;
     }
 
     @Override

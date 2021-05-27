@@ -12,7 +12,7 @@ class PlayerTest {
 
         String winner = player1.compareHand(player2);
 
-        Assertions.assertEquals("White wins. - with pair of : 2", winner);
+        Assertions.assertEquals("White wins. - with pair of: 2", winner);
     }
 
     @Test
@@ -22,7 +22,7 @@ class PlayerTest {
 
         String winner = player1.compareHand(player2);
 
-        Assertions.assertEquals("Black wins. - with three of kind : 5", winner);
+        Assertions.assertEquals("Black wins. - with three of kind: 5", winner);
     }
 
     @Test

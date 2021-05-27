@@ -1,9 +1,9 @@
 package com.kata.poker;
 
 public class Player {
-    private String name;
+    private final String name;
 
-    private Hand hand;
+    private final Hand hand;
 
     public Player(String name, Hand hand) {
         this.name = name;

@@ -68,7 +68,7 @@ class HandTest {
 
         String evaluateResult = hand.evaluate();
 
-        Assertions.assertEquals("pair of : 7", evaluateResult);
+        Assertions.assertEquals("pair of: 7", evaluateResult);
         Assertions.assertEquals(Rank.PAIR.getRankValue(), hand.getRank().getRankValue());
     }
 
@@ -84,7 +84,7 @@ class HandTest {
 
         String evaluateResult = hand.evaluate();
 
-        Assertions.assertEquals("pair of : Jack", evaluateResult);
+        Assertions.assertEquals("pair of: Jack", evaluateResult);
         Assertions.assertEquals(Rank.PAIR.getRankValue(), hand.getRank().getRankValue());
     }
 
@@ -100,7 +100,7 @@ class HandTest {
 
         String evaluateResult = hand.evaluate();
 
-        Assertions.assertEquals("two pair of : 5 and 7", evaluateResult);
+        Assertions.assertEquals("two pair of: 5 and 7", evaluateResult);
         Assertions.assertEquals(Rank.TWO_PAIR.getRankValue(), hand.getRank().getRankValue());
     }
 
@@ -116,7 +116,7 @@ class HandTest {
 
         String evaluateResult = hand.evaluate();
 
-        Assertions.assertEquals("two pair of : Queen and Ace", evaluateResult);
+        Assertions.assertEquals("two pair of: Queen and Ace", evaluateResult);
         Assertions.assertEquals(Rank.TWO_PAIR.getRankValue(), hand.getRank().getRankValue());
     }
 
@@ -132,7 +132,7 @@ class HandTest {
 
         String evaluateResult = hand.evaluate();
 
-        Assertions.assertEquals("three of kind : 3", evaluateResult);
+        Assertions.assertEquals("three of kind: 3", evaluateResult);
         Assertions.assertEquals(Rank.THREE_OF_KIND.getRankValue(), hand.getRank().getRankValue());
     }
 
@@ -148,7 +148,7 @@ class HandTest {
 
         String evaluateResult = hand.evaluate();
 
-        Assertions.assertEquals("straight of : 6", evaluateResult);
+        Assertions.assertEquals("straight of: 6", evaluateResult);
         Assertions.assertEquals(Rank.STRAIGHT.getRankValue(), hand.getRank().getRankValue());
     }
 
@@ -164,7 +164,7 @@ class HandTest {
 
         String evaluateResult = hand.evaluate();
 
-        Assertions.assertEquals("straight of : Queen", evaluateResult);
+        Assertions.assertEquals("straight of: Queen", evaluateResult);
         Assertions.assertEquals(Rank.STRAIGHT.getRankValue(), hand.getRank().getRankValue());
     }
 
@@ -180,7 +180,7 @@ class HandTest {
 
         String evaluateResult = hand.evaluate();
 
-        Assertions.assertEquals("flush of : Queen", evaluateResult);
+        Assertions.assertEquals("flush of: Queen", evaluateResult);
         Assertions.assertEquals(Rank.FLUSH.getRankValue(), hand.getRank().getRankValue());
     }
 
@@ -196,7 +196,7 @@ class HandTest {
 
         String evaluateResult = hand.evaluate();
 
-        Assertions.assertEquals("full of : 10 over 8", evaluateResult);
+        Assertions.assertEquals("full of: 10 over 8", evaluateResult);
         Assertions.assertEquals(Rank.FULL.getRankValue(), hand.getRank().getRankValue());
     }
 
@@ -212,7 +212,7 @@ class HandTest {
 
         String evaluateResult = hand.evaluate();
 
-        Assertions.assertEquals("four of kind : 10", evaluateResult);
+        Assertions.assertEquals("four of kind: 10", evaluateResult);
         Assertions.assertEquals(Rank.FOUR_OF_KIND.getRankValue(), hand.getRank().getRankValue());
     }
 
@@ -228,7 +228,7 @@ class HandTest {
 
         String evaluateResult = hand.evaluate();
 
-        Assertions.assertEquals("straight flush of : 10", evaluateResult);
+        Assertions.assertEquals("straight flush of: 10", evaluateResult);
         Assertions.assertEquals(Rank.STRAIGHT_FLUSH.getRankValue(), hand.getRank().getRankValue());
     }
 
