@@ -1,14 +1,13 @@
 package com.kata.poker;
 
 public class Player {
+    public static final String TIE = "Tie.";
+
+    public static final String WINS = "wins. - with";
+
     private final String name;
 
     private final Hand hand;
-
-    public Player(String name, Hand hand) {
-        this.name = name;
-        this.hand = hand;
-    }
 
     public Player(String name, String handString) {
         this.name = name;
@@ -22,7 +21,7 @@ public class Player {
         Boolean isWinner = this.hand.isBetterThan(player2.hand);
 
         if (isWinner == null) {
-            return "Tie.";
+            return TIE;
         }
 
         return isWinner ?
@@ -32,8 +31,6 @@ public class Player {
     }
 
     private String getWinner(Player player, String handPlayed) {
-        return player.name + " wins. - with " + handPlayed;
+        return String.join(" ", player.name, WINS, handPlayed);
     }
-
-
 }

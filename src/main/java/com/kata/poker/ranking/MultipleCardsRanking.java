@@ -9,8 +9,6 @@ import static com.kata.poker.util.RankingUtil.*;
 public class MultipleCardsRanking implements IRanking {
     private int numbers;
 
-    private List<Integer> valuesfromHighest;
-
     public MultipleCardsRanking(int numbers) {
         this.numbers = numbers;
     }
@@ -21,15 +19,11 @@ public class MultipleCardsRanking implements IRanking {
         if (frequencyCards.isEmpty()) {
             return null;
         }
-        valuesfromHighest = getCardsValuesFromHighest(hand.getHandGame());
+        List<Integer> valuesfromHighest = getCardsValuesFromHighest(hand.getHandGame());
         valuesfromHighest.removeAll(frequencyCards);
         Integer multiple = frequencyCards.get(0);
         valuesfromHighest.add(0, multiple);
+        hand.setHighestCards(valuesfromHighest);
         return getCardFromValue(hand.getHandGame(), multiple).getCardName();
-    }
-
-    @Override
-    public List<Integer> getValuesfromHighest() {
-        return valuesfromHighest;
     }
 }

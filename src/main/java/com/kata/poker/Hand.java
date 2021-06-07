@@ -40,10 +40,13 @@ public class Hand {
         return handGame;
     }
 
+    public void setHighestCards(List<Integer> highestCards) {
+        this.highestCards = highestCards;
+    }
+
     public String evaluate() {
         for (Rank value : Rank.values()) {
             this.winsCards = value.evaluate(this);
-            this.highestCards = value.getRanking().getValuesfromHighest();
             if (this.winsCards != null) {
                 this.rank = value;
                 return getHandEvaluation();

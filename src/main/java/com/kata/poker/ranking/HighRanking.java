@@ -9,15 +9,11 @@ import java.util.List;
 
 
 public class HighRanking implements IRanking {
-    private List<Integer> valuesfromHighest;
-
-    public List<Integer> getValuesfromHighest() {
-        return valuesfromHighest;
-    }
 
     @Override
     public String evaluate(Hand hand) {
-        valuesfromHighest = getCardsValuesFromHighest(hand.getHandGame());
+        List<Integer> valuesfromHighest = getCardsValuesFromHighest(hand.getHandGame());
+        hand.setHighestCards(valuesfromHighest);
         return getCardFromValue(hand.getHandGame(), valuesfromHighest.get(0)).getCardName();
     }
 }

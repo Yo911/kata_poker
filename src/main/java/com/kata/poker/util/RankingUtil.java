@@ -4,7 +4,6 @@ import com.kata.poker.Card;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -17,15 +16,8 @@ public class RankingUtil {
     }
 
     public static List<Integer> getFrequencyCards(List<Integer> values, int n) {
-        List<Integer> frequency = values.stream()
+        return values.stream()
                 .filter(frequencyOfCardValuePredicate(values, n)).distinct().collect(Collectors.toList());
-        return frequency;
-    }
-
-    public static Card getNumbersOfKind(Set<Card> handGame, List<Integer> values, int numberOfFrequency) {
-        Optional<Integer> numberOfKinds = values.stream()
-                .filter(frequencyOfCardValuePredicate(values, numberOfFrequency)).findFirst();
-        return numberOfKinds.isEmpty() ? null : getCardFromValue(handGame, numberOfKinds.get());
     }
 
     private static Predicate<Integer> frequencyOfCardValuePredicate(List<Integer> values, int numberOfFrequency) {

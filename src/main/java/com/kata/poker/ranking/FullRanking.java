@@ -2,8 +2,6 @@ package com.kata.poker.ranking;
 
 import com.kata.poker.Card;
 import com.kata.poker.Hand;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -11,7 +9,6 @@ import static com.kata.poker.util.RankingUtil.getCardFromValue;
 import static com.kata.poker.util.RankingUtil.getFrequencyCards;
 
 public class FullRanking implements IRanking{
-    private List<Integer> valuesfromHighest;
 
     @Override
     public String evaluate(Hand hand) {
@@ -22,13 +19,9 @@ public class FullRanking implements IRanking{
         }
         Integer threeOfKindValue = threeOfKindCards.get(0);
         Integer pairValue = pairCards.get(0);
-        valuesfromHighest = List.of(threeOfKindValue, pairValue);
+        List<Integer> valuesfromHighest = List.of(threeOfKindValue, pairValue);
+        hand.setHighestCards(valuesfromHighest);
         Set<Card> handGame = hand.getHandGame();
         return getCardFromValue(handGame, threeOfKindValue).getCardName() + " over " + getCardFromValue(handGame, pairValue).getCardName();
-    }
-
-    @Override
-    public List<Integer> getValuesfromHighest() {
-        return valuesfromHighest;
     }
 }
